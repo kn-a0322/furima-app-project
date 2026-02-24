@@ -20,6 +20,20 @@
         <img src="{{ asset('images/logo/COACHTECHヘッダーロゴ.png') }}" alt="COACHTECH">
       </h1>
       @yield('link')
+      @if (Auth::check())
+        <nav class="header-nav">
+          <form action="{{ route('logout') }}" method="post">
+            @csrf
+            <button type="submit" class="header-nav__logout-button">ログアウト</button>
+          </form>
+        </nav>
+      @else
+        @if(!Route::is('login'))
+        <nav class="header-nav">
+          <a href="{{ route('login') }}" class="header-nav__login-link">ログイン</a>
+        </nav>
+        @endif
+      @endif
     </header>
     <div class="content">
       @yield('content')
