@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
-class LoginRequest extends FormRequest
+class LoginRequest extends \Laravel\Fortify\Http\Requests\LoginRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -47,7 +47,7 @@ class LoginRequest extends FormRequest
     {
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             throw ValidationException::withMessages([
-                'email' => 'ログイン情報が登録されていません',
+                'email' => trans('auth.failed'),
             ]);
         }
     }
