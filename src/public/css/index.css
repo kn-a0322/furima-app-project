@@ -1,0 +1,226 @@
+/* ===========================================
+   商品一覧画面（トップページ）
+=========================================== */
+
+/* 全体コンテナ */
+.index-container {
+    width: 100%;
+    max-width: 1512px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* ===========================================
+   タブエリア
+=========================================== */
+.index-tabs {
+    width: 100%;
+    max-width: 1512px;
+    height: 47px;
+    margin: 45px auto 30px;
+    border-bottom: 2px solid #5F5F5F;
+}
+
+.index-tabs__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 0;
+}
+
+.index-tabs__item {
+    margin: 0;
+    padding: 0;
+}
+
+.index-tabs__link {
+    display: block;
+    width: 155px;
+    height: 40px;
+    padding: 8px 0;
+    font-size: 24px;
+    font-weight: 700; /* Bold */
+    color: #5F5F5F;
+    text-align: center;
+    text-decoration: none;
+    line-height: 24px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+/* アクティブタブ */
+.index-tabs__link.is-active {
+    color: #FF0000;
+}
+
+
+/* 最初のタブ（おすすめ）に左マージン */
+.index-tabs__item:first-child .index-tabs__link {
+    margin-left: 130px;
+}
+
+/* 2番目のタブ（マイリスト）の位置調整 */
+.index-tabs__item:nth-child(2) .index-tabs__link {
+    margin-left: 50px; /* 130px + 155px + 50px = 335px */
+}
+
+/* ===========================================
+   商品グリッド
+=========================================== */
+.index-item-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px 30px;
+    width: 100%;
+    max-width: 1512px;
+    margin: 50px auto 80px;
+    padding: 0 20px 0 70px; /* 左から70pxスタート */
+    box-sizing: border-box;
+}
+
+/* 商品カード */
+.index-item {
+    display: flex;
+    flex-direction: column;
+    width: 290px; /* 固定幅 */
+    height: 320px; /* 固定高さ */
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;/* 将来的に使用 */
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); /* #00000040 */
+}
+
+
+/* 商品画像エリア */
+.index-item__image {
+    width: 290px; /* 固定幅 */
+    height: 290px; /* 固定高さ（正方形） */
+    background-color: #D9D9D9;
+    overflow: hidden;/* 画像がはみ出ないように */
+    border-radius: 4px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.index-item__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 商品名 */
+.index-item__name {
+    margin-top: 10px;
+    padding: 0 5px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #000000;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 30px; /* 商品名エリアの高さ（320 - 290 = 30） */
+}
+
+/* Soldオーバーレイ（将来的に使用） */
+.index-item__sold-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.index-item__sold-text {
+    font-size: 48px;
+    font-weight: 700;
+    color: #FF5555;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* ===========================================
+   レスポンシブ対応
+=========================================== */
+
+/* タブレット (768px - 850px) */
+@media screen and (min-width: 768px) and (max-width: 850px) {
+    .index-container {
+        max-width: 100%;
+        padding: 0 30px;
+    }
+
+    .index-tabs {
+        max-width: 100%;
+        margin: 30px auto 20px;
+    }
+
+    .index-tabs__item:first-child .index-tabs__link {
+        margin-left: 60px;
+    }
+
+    .index-tabs__item:nth-child(2) .index-tabs__link {
+        margin-left: 30px;
+    }
+
+    .index-tabs__link {
+        width: 140px;
+        font-size: 22px;
+    }
+
+    .index-item-grid {
+        gap: 30px 20px;
+        max-width: 100%;
+        margin: 40px auto 60px;
+        padding: 0 30px;
+    }
+
+    /* タブレットでも固定サイズを維持 */
+    .index-item {
+        width: 290px;
+        height: 320px;
+    }
+
+    .index-item__image {
+        width: 290px;
+        height: 290px;
+    }
+
+    .index-item__name {
+        font-size: 16px;
+    }
+}
+
+/* PC (1400px - 1540px) */
+@media screen and (min-width: 1400px) and (max-width: 1540px) {
+    .index-container {
+        max-width: 1512px;
+    }
+
+    .index-tabs {
+        max-width: 1512px;
+    }
+
+    .index-item-grid {
+        max-width: 1512px;
+    }
+
+    /* PC範囲では固定サイズを維持 */
+    .index-item {
+        width: 290px;
+        height: 320px;
+    }
+
+    .index-item__image {
+        width: 290px;
+        height: 290px;
+    }
+}
