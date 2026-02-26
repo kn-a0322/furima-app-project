@@ -16,7 +16,11 @@ use App\Http\Controllers\ItemController;
 
 Route::get('/', [ItemController::class, 'index'])->name('item.index');
 
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/sell', [ItemController::class, 'sell'])->name('sell');
+    Route::get('/mypage', [ProfileController::class, 'mypage'])->name('mypage');
+
 
 });

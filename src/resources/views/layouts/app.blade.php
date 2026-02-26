@@ -26,6 +26,8 @@
             @csrf
             <button type="submit" class="header-nav__logout-button">ログアウト</button>
           </form>
+          <a href="{{ route('mypage') }}" class="header-nav__mypage-link">マイページ</a>
+          <a href="{{ route('sell') }}" class="header-nav__sell-link">出品</a>
         </nav>
       @else
         @if(!Route::is('login'))
