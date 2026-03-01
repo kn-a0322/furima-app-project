@@ -17,24 +17,17 @@
    </ul>
  </div>
   <div class="index-item-grid">
+    @foreach ($items as $item)
     <div class="index-item">
         <div class="index-item__image">
-            <img src="{{ asset('images/item-images/item1.jpg') }}" alt="商品1">
+            <img src="{{ asset($item->image_path) }}" alt="{{ $item->name }}">
+            @if ($item->is_sold)
+            <span class="index-item__sold-out">Sold</span>
+            @endif
         </div>
-            <p class="index-item__name">商品1(仮)</p>
+            <p class="index-item__name">{{ $item->name }}</p>
     </div>
-    <div class="index-item">
-        <div class="index-item__image">
-            <img src="{{ asset('images/item-images/item2.jpg') }}" alt="商品2">
-        </div>
-            <p class="index-item__name">商品2(仮)</p>
-    </div>
-    <div class="index-item">
-        <div class="index-item__image">
-            <img src="{{ asset('images/item-images/item3.jpg') }}" alt="商品3">
-        </div>
-            <p class="index-item__name">商品3(仮)</p>
-    </div>
+    @endforeach
   </div>
 </div>
 @endsection
