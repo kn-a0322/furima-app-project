@@ -20,21 +20,22 @@
         <img src="{{ asset('images/logo/COACHTECHヘッダーロゴ.png') }}" alt="COACHTECH">
       </h1>
       @yield('link')
-      @if (Auth::check())
-        <nav class="header-nav">
+      @if (!Route::is('login') && !Route::is('register') && !Route::is('verify-email'))
+      <nav class="header-nav">
+        <form class="header-nav__search-form" action="{{ route('item.index') }}" method="get">
+          <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="なにをお探しですか？">
+        </form>
+        @if (Auth::check())
           <form action="{{ route('logout') }}" method="post">
             @csrf
             <button type="submit" class="header-nav__logout-button">ログアウト</button>
           </form>
-          <a href="{{ route('mypage') }}" class="header-nav__mypage-link">マイページ</a>
-          <a href="{{ route('sell') }}" class="header-nav__sell-link">出品</a>
-        </nav>
-      @else
-        @if(!Route::is('login'))
-        <nav class="header-nav">
+        @else
           <a href="{{ route('login') }}" class="header-nav__login-link">ログイン</a>
-        </nav>
         @endif
+        <a href="{{ route('mypage') }}" class="header-nav__mypage-link">マイページ</a>
+        <a href="{{ route('sell') }}" class="header-nav__sell-link">出品</a>
+      </nav>
       @endif
     </header>
     <div class="content">

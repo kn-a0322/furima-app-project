@@ -9,10 +9,10 @@
  <div class="index-tabs">
    <ul class="index-tabs__list">
     <li class="index-tabs__item">
-        <a href="/" class="index-tabs__link {{ !request('tab') ? 'is-active' : '' }}">おすすめ</a>
+        <a href="{{ route('item.index', request()->only('keyword')) }}" class="index-tabs__link {{ request('tab') != 'mylist' ? 'is-active' : '' }}">おすすめ</a>
     </li>
     <li class="index-tabs__item">
-        <a href="/?tab=mylist" class="index-tabs__link {{ request('tab') == 'mylist' ? 'is-active' : '' }}">マイリスト</a>
+        <a href="{{ route('item.index', ['tab' => 'mylist'] + request()->only('keyword')) }}" class="index-tabs__link {{ request('tab') == 'mylist' ? 'is-active' : '' }}">マイリスト</a>
     </li>
    </ul>
  </div>
