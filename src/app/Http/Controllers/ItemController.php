@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\Comment;
 
 class ItemController extends Controller
 {
@@ -32,5 +33,31 @@ class ItemController extends Controller
 
         $items = $query->get();
         return view('index', compact('items'));
+    }
+
+    public function show(Item $item)
+    {
+        $item->load('comments.user.profile', 'categories', 'likes');
+        return view('show', compact('item'));
+    }
+
+    public function purchase(Item $item)
+    {
+        return view('purchase', compact('item'));
+    }
+
+    public function commentStore(Request $request, Item $item)
+    {
+        $request->validate([
+            'comment' => 'required|max:255',
+        ]);
+
+        Comment::create([
+            'user_id' => auth()->id(),
+            'item_id' => $item->id,
+            'comment' => $request->comment,
+        ]);
+
+        return back();
     }
 }
