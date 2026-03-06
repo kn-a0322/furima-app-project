@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Comment;
+use App\Models\Like;
+use App\Http\Requests\CommentRequest;
 
 class ItemController extends Controller
 {
@@ -46,12 +48,25 @@ class ItemController extends Controller
         return view('purchase', compact('item'));
     }
 
-    public function commentStore(Request $request, Item $item)
+    public function toggleLike(Item $item)
     {
-        $request->validate([
-            'comment' => 'required|max:255',
-        ]);
+        $like = $item->likes()->where('user_id', auth()->id())->first();
 
+        if ($like) {
+            $like->delete();
+        } else {
+            Like::create([
+                'item_id' => $item->id,
+                'user_id' => auth()->id(),
+            ]);
+        }
+
+        return back();
+    }
+
+    public function commentStore(CommentRequest $request, Item $item)
+    {
+        
         Comment::create([
             'user_id' => auth()->id(),
             'item_id' => $item->id,

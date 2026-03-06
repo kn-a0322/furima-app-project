@@ -17,12 +17,18 @@ use App\Http\Controllers\ItemController;
 Route::get('/', [ItemController::class, 'index'])->name('item.index');
 Route::get('/item/{item}', [ItemController::class, 'show'])->name('item.show');
 
-
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::get('/sell', [ItemController::class, 'sell'])->name('sell');
-    Route::get('/mypage', [ProfileController::class, 'mypage'])->name('mypage');
-
-    Route::get('/item/{item}/purchase', [ItemController::class, 'purchase'])->name('item.purchase');
+// まず「ログインしていること」を大前提にする
+Route::middleware(['auth'])->group(function () {
+    
+    // ログインさえしていればできること
+    Route::post('/item/{item}/like', [ItemController::class, 'toggleLike'])->name('like.toggle');
     Route::post('/item/{item}/comment', [ItemController::class, 'commentStore'])->name('comment.store');
+
+    // ログイン ＋ 「メール認証まで終わっている人」だけができること
+    Route::middleware(['verified'])->group(function () {
+        Route::get('/sell', [ItemController::class, 'sell'])->name('sell');
+        Route::get('/mypage', [ProfileController::class, 'mypage'])->name('mypage');
+        Route::get('/item/{item}/purchase', [ItemController::class, 'purchase'])->name('item.purchase');
+        Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    });
 });

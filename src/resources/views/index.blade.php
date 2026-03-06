@@ -18,15 +18,15 @@
  </div>
   <div class="index-item-grid">
     @foreach ($items as $item)
-    <div class="index-item">
+    <a href="{{ route('item.show', $item) }}" class="index-item">
         <div class="index-item__image">
             <img src="{{ asset($item->image_path) }}" alt="{{ $item->name }}">
             @if ($item->is_sold)
             <span class="index-item__sold-out">Sold</span>
             @endif
         </div>
-            <p class="index-item__name">{{ $item->name }}</p>
-    </div>
+        <p class="index-item__name">{{ $item->name }}</p>
+    </a>
     @endforeach
   </div>
 </div>

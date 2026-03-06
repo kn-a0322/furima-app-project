@@ -19,7 +19,20 @@
 
             <div class="show-item__reactions">
                 <div class="show-item__reaction-item">
-                    <img src="{{ asset('images/icons/heart.png') }}" alt="いいね" class="show-item__reaction-icon">
+                    @auth
+                        <form action="{{ route('like.toggle', $item) }}" method="post">
+                            @csrf
+                            <button type="submit" class="show-item__like-button">
+                                @if ($item->isLikedBy(auth()->user()))
+                                    <img src="{{ asset('images/icons/heart-pink.png') }}" alt="いいね済み" class="show-item__reaction-icon">
+                                @else
+                                    <img src="{{ asset('images/icons/heart.png') }}" alt="いいね" class="show-item__reaction-icon">
+                                @endif
+                            </button>
+                        </form>
+                    @else
+                        <img src="{{ asset('images/icons/heart.png') }}" alt="いいね" class="show-item__reaction-icon">
+                    @endauth
                     <span>{{ $item->likes->count() }}</span>
                 </div>
                 <div class="show-item__reaction-item">
@@ -73,7 +86,10 @@
                 @csrf
                 <textarea name="comment"
                           class="show-item__comment-textarea"
-                          rows="5"></textarea>
+                          rows="5">{{ old('comment') }}</textarea>
+                @error('comment')
+                    <p class="show-item__comment-error">{{ $message }}</p>
+                @enderror   
                 <button type="submit" class="show-item__comment-submit">コメントを送信する</button>
             </form>
 
