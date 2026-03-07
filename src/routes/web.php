@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PurchaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +17,7 @@ use App\Http\Controllers\ItemController;
 */
 
 Route::get('/', [ItemController::class, 'index'])->name('item.index');
-Route::get('/item/{item}', [ItemController::class, 'show'])->name('item.show');
+Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('item.show');
 
 // まず「ログインしていること」を大前提にする
 Route::middleware(['auth'])->group(function () {
@@ -28,7 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['verified'])->group(function () {
         Route::get('/sell', [ItemController::class, 'sell'])->name('sell');
         Route::get('/mypage', [ProfileController::class, 'mypage'])->name('mypage');
-        Route::get('/item/{item}/purchase', [ItemController::class, 'purchase'])->name('item.purchase');
+        Route::get('/purchase/{item_id}', [PurchaseController::class, 'purchase'])->name('purchase');
         Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     });
 });

@@ -37,10 +37,10 @@ class ItemController extends Controller
         return view('index', compact('items'));
     }
 
-    public function show(Item $item)
+    public function show(Item $item_id)
     {
-        $item->load('comments.user.profile', 'categories', 'likes');
-        return view('show', compact('item'));
+        $item_id->load('comments.user.profile', 'categories', 'likes');
+        return view('show', ['item' => $item_id]);
     }
 
     public function purchase(Item $item)
