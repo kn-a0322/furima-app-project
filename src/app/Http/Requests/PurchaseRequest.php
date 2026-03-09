@@ -22,7 +22,7 @@ class PurchaseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'payment_method' => 'required|in:konbini,credit_card',
+            'payment_method' => 'required|in:convenience_store,credit_card',
             'postcode'       => 'required|string|max:8',
             'address'        => 'required|string|max:255',
         ];

@@ -9,15 +9,25 @@ class Item extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'name',
+        'description',
+        'price',
+        'image_path',
+        'condition',
+        'is_sold',
+    ];
+
 
 public function user()
 {
     return $this->belongsTo(User::class);
 }
 
-public function orders()
+public function order()
 {
-    return $this->hasMany(Order::class);
+    return $this->hasOne(Order::class);
 }
 
 public function categories()

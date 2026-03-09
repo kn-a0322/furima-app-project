@@ -5,11 +5,8 @@
 @endsection
 
 @section('content')
-{{--
-    購入機能を実装するときは method="get" → method="post" に変更し、
-    action を購入処理のルートに変更する予定
---}}
-<form action="{{ route('purchase', $item) }}" method="get">
+<form action="{{ route('purchase.store', $item) }}" method="post">
+    @csrf
 
     <div class="purchase-container">
 
@@ -24,10 +21,10 @@
 
             <div class="purchase-payment">
                 <h3 class="purchase-payment__title">支払い方法</h3>
-                <select name="payment_method" class="purchase-payment__select">
-                    <option value="" disabled {{ !$selectedPayment ? 'selected' : '' }}>選択してください</option>
-                    <option value="konbini" {{ $selectedPayment === 'konbini' ? 'selected' : '' }}>コンビニ払い</option>
-                    <option value="credit_card" {{ $selectedPayment === 'credit_card' ? 'selected' : '' }}>カード支払い</option>
+                <select id="payment_method" name="payment_method" class="purchase-payment__select">
+                    <option value="" disabled {{ !old('payment_method') ? 'selected' : '' }}>選択してください</option>
+                    <option value="convenience_store" {{ old('payment_method') === 'convenience_store' ? 'selected' : '' }}>コンビニ払い</option>
+                    <option value="credit_card" {{ old('payment_method') === 'credit_card' ? 'selected' : '' }}>カード支払い</option>
                 </select>
                 @error('payment_method')
                     <p class="purchase__error-message">{{ $message }}</p>
@@ -40,7 +37,6 @@
                     <a href="{{ route('profile.edit') }}" class="purchase-delivery__change-link">変更する</a>
                 </div>
                 @if ($profile)
-                    {{-- プロフィール遷移の設定ができたらif文は削除 --}}
                     <input type="hidden" name="postcode" value="{{ $profile->postcode }}">
                     <input type="hidden" name="address" value="{{ $profile->address }}">
                     <p class="purchase-delivery__address">〒{{ $profile->postcode }}</p>
@@ -62,12 +58,30 @@
                 </tr>
                 <tr class="purchase-summary__row">
                     <th class="purchase-summary__label">支払い方法</th>
-                    <td class="purchase-summary__value">{{ $paymentLabel }}</td>
+                    {{-- JavaScriptで左側のselectと連動して書き換えられる --}}
+                    <td class="purchase-summary__value" id="payment-display">
+                        {{ old('payment_method') === 'convenience_store' ? 'コンビニ払い' : (old('payment_method') === 'credit_card' ? 'カード支払い' : '') }}
+                    </td>
                 </tr>
             </table>
             <button type="submit" class="purchase__submit-button">購入する</button>
         </div>
-
     </div>
 </form>
+
+<script>
+    const select = document.getElementById('payment_method');
+    const display = document.getElementById('payment-display');
+
+    // 選択値と表示ラベルの対応
+    const labels = {
+        'convenience_store': 'コンビニ払い',
+        'credit_card':       'カード支払い',
+    };
+
+    // selectの値が変わるたびに右側の表示を更新する
+    select.addEventListener('change', function () {
+        display.textContent = labels[this.value] ?? '';
+    });
+</script>
 @endsection

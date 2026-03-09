@@ -12,6 +12,21 @@
 }
 
 /* ===========================================
+   購入完了メッセージ
+=========================================== */
+.success-message {
+    max-width: 1512px;
+    margin: 20px auto 0;
+    padding: 16px 24px;
+    background-color: #D4EDDA;
+    color: #155724;
+    border: 1px solid #C3E6CB;
+    border-radius: 4px;
+    font-size: 18px;
+    text-align: center;
+}
+
+/* ===========================================
    タブエリア
 =========================================== */
 .index-tabs {
