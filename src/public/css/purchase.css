@@ -2,6 +2,263 @@
    商品購入画面
 =========================================== */
 
+/* 全体コンテナ（左右2カラム） */
+.purchase-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 60px;
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 0 40px 0 80px;
+    box-sizing: border-box;
+}
+
+/* ===========================================
+   左側エリア
+=========================================== */
+.purchase__left {
+    flex: 1;
+    min-width: 0;
+}
+
+/* ===========================================
+   商品情報（画像 + 商品名・価格）
+=========================================== */
+.purchase-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 56px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #000000;
+    margin-bottom: 24px;
+}
+
+.purchase-item__image {
+    width: 177px;
+    height: 177px;
+    object-fit: cover;
+    background-color: #D9D9D9;
+    flex-shrink: 0;
+    display: block;
+}
+
+/* 商品名・価格グループ（width: 325, height: 185） */
+.purchase-item__detail {
+    width: 325px;
+    min-height: 185px;
+    padding-top: 10px;
+    flex-shrink: 0;
+}
+
+/* 商品名：Bold 30px */
+.purchase-item__name {
+    font-family: 'Inter', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+/* 価格：Regular 27px（¥も含む） */
+.purchase-item__price {
+    font-family: 'Inter', sans-serif;
+    font-size: 27px;
+    font-weight: 400;
+    line-height: 1;
+    color: #000000;
+}
+
+/* ===========================================
+   支払い方法
+=========================================== */
+.purchase-payment {
+    padding-bottom: 24px;
+    border-bottom: 1px solid #000;
+    margin-bottom: 24px;
+}
+
+.purchase-payment__title {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0;
+    color: #000000;
+    width: 325px;
+    min-height: 85px;
+    padding-left: 115px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+    box-sizing: border-box;
+}
+
+/* selectのラッパー：left: 175px */
+.purchase-payment__select-wrapper {
+    margin-left: 175px;
+}
+
+.purchase-payment__select {
+    /* レイアウト */
+    width: 265px;
+    height: 31px;
+    box-sizing: border-box;
+
+    /* ボーダー */
+    border: 1px solid #5F5F5F;
+    border-radius: 0;
+
+    /* 背景・テキスト */
+    background-color: #ffffff;
+    color: #5F5F5F;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+
+    /* カスタム矢印（Polygon1: 13×14px、#F5F5F5、下向き） */
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='14' viewBox='0 0 13 14'%3E%3Cpolygon points='6.5,14 0,0 13,0' fill='%235F5F5F' opacity='1'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 13px 14px;
+
+    padding: 0 30px 0 10px;
+    cursor: pointer;
+}
+
+.purchase-payment__select option {
+    background-color: #ffffff;
+    color: #5F5F5F;
+    font-weight: 700;
+}
+
+/* ===========================================
+   配送先
+=========================================== */
+.purchase-delivery {
+    padding-bottom: 24px;
+    border-bottom: 1px solid #000000;
+}
+
+.purchase-delivery__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.purchase-delivery__title {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0;
+    color: #000000;
+    width: 325px;
+    min-height: 85px;
+    padding-left: 115px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.purchase-delivery__change-link {
+    font-size: 15px;
+    color: #3B82F6;
+    text-decoration: none;
+}
+
+.purchase-delivery__change-link:hover {
+    text-decoration: underline;
+}
+
+.purchase-delivery__address {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: semibold;
+    line-height: 1;
+    color: #000000;
+    display: flex;
+    align-items: center;
+    min-height: 1.6em;
+    padding-left: 175px;
+}
+
+/* ===========================================
+   右側エリア（サマリー + 購入ボタン）
+=========================================== */
+/* left: 987px - container padding 80px = 907px を flex で自動調整 */
+.purchase__right {
+    width: 440px;
+    flex-shrink: 0;
+}
+
+/* サマリーテーブル（width: 440, height: 230, border: 1px #000000） */
+.purchase-summary {
+    width: 440px;
+    height: 230px;
+    border: 1px solid #000000;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+    box-sizing: border-box;
+}
+
+/* 行：横線あり、高さ115px */
+.purchase-summary__row {
+    height: 115px;
+    border-bottom: 1px solid #000000;
+}
+
+.purchase-summary__row:last-child {
+    border-bottom: none;
+}
+
+/* 左セル：ラベル（Regular 20px） */
+.purchase-summary__label {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: #000000;
+    text-align: center;
+    vertical-align: middle;
+    width: 220px;
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+
+/* 右セル：価格・支払い方法（Regular 24px） */
+.purchase-summary__value {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: #000000;
+    text-align: center;
+    vertical-align: middle;
+    width: 220px;
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+
+/* 購入するボタン */
+.purchase__submit-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 440px;
+    height: 60px;
+    background-color: #FF5555;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
 /* ===========================================
    エラーメッセージ
 =========================================== */
@@ -10,4 +267,39 @@
     font-size: 20px;
     margin-top: 8px;
     min-height: 20px;
+}
+
+/* ===========================================
+   レスポンシブ対応
+=========================================== */
+
+/* タブレット (768px - 850px) */
+@media screen and (min-width: 768px) and (max-width: 850px) {
+    .purchase-container {
+        flex-direction: column;
+        padding: 0 24px;
+        margin: 30px auto;
+        gap: 30px;
+    }
+
+    .purchase__right {
+        width: 100%;
+    }
+
+    .purchase-item__image {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+/* PC (1400px - 1540px) */
+@media screen and (min-width: 1400px) and (max-width: 1540px) {
+    .purchase-container {
+        max-width: 1200px;
+        padding: 0 60px 0 100px;
+    }
+
+    .purchase__right {
+        width: 320px;
+    }
 }

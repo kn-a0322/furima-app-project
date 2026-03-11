@@ -21,11 +21,13 @@
 
             <div class="purchase-payment">
                 <h3 class="purchase-payment__title">支払い方法</h3>
-                <select id="payment_method" name="payment_method" class="purchase-payment__select">
-                    <option value="" disabled {{ !old('payment_method') ? 'selected' : '' }}>選択してください</option>
-                    <option value="convenience_store" {{ old('payment_method') === 'convenience_store' ? 'selected' : '' }}>コンビニ払い</option>
-                    <option value="credit_card" {{ old('payment_method') === 'credit_card' ? 'selected' : '' }}>カード支払い</option>
-                </select>
+                <div class="purchase-payment__select-wrapper">
+                    <select id="payment_method" name="payment_method" class="purchase-payment__select">
+                        <option value="" disabled {{ !old('payment_method') ? 'selected' : '' }}>選択してください</option>
+                        <option value="convenience_store" {{ old('payment_method') === 'convenience_store' ? 'selected' : '' }}>コンビニ払い</option>
+                        <option value="credit_card" {{ old('payment_method') === 'credit_card' ? 'selected' : '' }}>カード支払い</option>
+                    </select>
+                </div>
                 @error('payment_method')
                     <p class="purchase__error-message">{{ $message }}</p>
                 @enderror
