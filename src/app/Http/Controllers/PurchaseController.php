@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Order;
 use App\Http\Requests\PurchaseRequest;
+use App\Http\Requests\AddressRequest;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
 
@@ -17,8 +18,17 @@ class PurchaseController extends Controller
         $item = $item_id;
         $profile = auth()->user()->profile;
         $selectedPayment = $request->query('payment_method', '');
+        $newAddress = session('new_address');
 
-        return view('purchase', compact('item', 'profile', 'selectedPayment'));
+       // 新しい住所はあるか？→なければプロフィールから取得できるか？→どちらもなければ空欄を返す
+        $displayPostcode = $newAddress['postcode'] ?? ($profile->postcode ?? '');
+        $displayAddress = $newAddress['address'] ?? ($profile->address ?? '');
+        $displayBuilding = $newAddress['building'] ?? ($profile->building ?? '');
+
+
+        return view('purchase', compact(
+            'item', 'profile', 'selectedPayment',
+            'displayPostcode', 'displayAddress', 'displayBuilding'));
     }
 
     // 購入ボタン押下 → バリデーション → Stripe決済画面へリダイレクト
@@ -84,5 +94,28 @@ class PurchaseController extends Controller
         session()->forget('pending_order');
 
         return redirect()->route('item.index')->with('message', '購入が完了しました');
+    }
+
+    public function addressEdit(Item $item_id)
+    {
+        $item = $item_id;
+        $profile = auth()->user()->profile;
+
+        return view('purchase.address', compact('item', 'profile'));
+    }
+
+    public function addressUpdate(AddressRequest $request, Item $item_id)
+    {
+        $item = $item_id;
+
+        session([
+            'new_address' => [
+                'postcode' => $request->postcode,
+                'address'  => $request->address,
+                'building' => $request->building,
+            ]
+        ]);
+
+        return redirect()->route('purchase', $item->id)->with('message', '配送先を変更しました');
     }
 }

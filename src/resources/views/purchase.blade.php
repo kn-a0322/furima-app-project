@@ -36,13 +36,13 @@
             <div class="purchase-delivery">
                 <div class="purchase-delivery__header">
                     <h3 class="purchase-delivery__title">配送先</h3>
-                    <a href="{{ route('profile.edit') }}" class="purchase-delivery__change-link">変更する</a>
+                    <a href="{{ route('purchase.address.edit', $item->id) }}" class="purchase-delivery__change-link">変更する</a>
                 </div>
-                @if ($profile)
-                    <input type="hidden" name="postcode" value="{{ $profile->postcode }}">
-                    <input type="hidden" name="address" value="{{ $profile->address }}">
-                    <p class="purchase-delivery__address">〒{{ $profile->postcode }}</p>
-                    <p class="purchase-delivery__address">{{ $profile->address }}{{ $profile->building }}</p>
+                @if ($displayPostcode)
+                    <input type="hidden" name="postcode" value="{{ $displayPostcode }}">
+                    <input type="hidden" name="address" value="{{ $displayAddress }}">
+                    <p class="purchase-delivery__address">〒{{ $displayPostcode }}</p>
+                    <p class="purchase-delivery__address">{{ $displayAddress }}{{ $displayBuilding }}</p>
                 @else
                     <p class="purchase-delivery__address">住所が登録されていません</p>
                 @endif
