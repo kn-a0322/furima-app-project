@@ -101,7 +101,7 @@ class PurchaseController extends Controller
         $item = $item_id;
         $profile = auth()->user()->profile;
 
-        return view('purchase.address', compact('item', 'profile'));
+        return view('address', compact('item', 'profile'));
     }
 
     public function addressUpdate(AddressRequest $request, Item $item_id)

@@ -30,7 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['verified'])->group(function () {
         Route::get('/sell', [ItemController::class, 'sell'])->name('sell');
         Route::get('/mypage', [ProfileController::class, 'mypage'])->name('mypage');
-        
+
         // address ルートは {item_id} より先に定義しないと /purchase/{item_id} にマッチしてしまう
         Route::get('/purchase/address/{item_id}', [PurchaseController::class, 'addressEdit'])->name('purchase.address.edit');
         Route::post('/purchase/address/{item_id}', [PurchaseController::class, 'addressUpdate'])->name('purchase.address.update');
@@ -38,7 +38,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/purchase/{item_id}', [PurchaseController::class, 'purchase'])->name('purchase');
         Route::post('/purchase/{item_id}', [PurchaseController::class, 'purchaseStore'])->name('purchase.store');
         Route::get('/purchase/{item_id}/success', [PurchaseController::class, 'purchaseSuccess'])->name('purchase.success');
-
+        
         Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         
     });
