@@ -40,6 +40,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/purchase/{item_id}/success', [PurchaseController::class, 'purchaseSuccess'])->name('purchase.success');
         
         Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
         
     });
 });
