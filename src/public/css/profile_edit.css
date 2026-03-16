@@ -1,0 +1,284 @@
+/* ===========================================
+   プロフィール設定画面
+=========================================== */
+
+/* コンテナ（width: 680、left: 416 を中央寄せで再現）*/
+.profile-edit-container {
+    width: 680px;
+    margin: 0 auto;
+    padding-top: 80px;
+    box-sizing: border-box;
+}
+
+/* ===========================================
+   タイトル（width:299, height:47, top:139, left:606）
+   コンテナ内で中央寄せ → (680-299)/2 ≈ 190px = text-align:center と同義
+=========================================== */
+.profile-edit__title {
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #000000;
+    width: 299px;
+    height: 47px;
+    line-height: 47px;
+    text-align: center;
+    margin: 0 auto 47px; /* 下マージン: image top(233) - h2 bottom(139+47=186) = 47px */
+}
+
+/* ===========================================
+   画像エリア（画像 + ボタンを横並び）
+   gap: 606(ボタン left) - 416(コンテナ left) - 150(画像幅) = 40px
+=========================================== */
+.profile-edit-image {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+/* プロフィール画像（width:150, height:150, 円形）*/
+.profile-edit-image__viewer {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.profile-edit-image__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 画像未設定のプレースホルダー */
+.profile-edit-image__placeholder {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #D9D9D9;
+}
+
+/* 「画像を選択する」ボタン（width:179, height:49, border-radius:10px）*/
+.profile-edit-image__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 179px;
+    height: 49px;
+    border: 2px solid #FF5555;
+    border-radius: 10px;
+    color: #FF5555;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.profile-edit-image__button:hover {
+    background-color: #FF5555;
+    color: #FFFFFF;
+}
+
+/* ファイルinputは非表示にしてlabelで代替 */
+.profile-edit-image__input {
+    display: none;
+}
+
+/* ===========================================
+   フォーム各グループ（ラベル＋インプット）
+   グループ全体: width:680, height:92, left:416
+=========================================== */
+.profile-edit-form__group {
+    width: 680px;
+    height: 92px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* 項目名: Bold, 24px, #000000, 左詰め */
+.profile-edit-form__label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #000000;
+    line-height: 1;
+}
+
+/* テキスト欄: border 1px #5F5F5F, radius 4px, テキスト Bold 24px #5F5F5F */
+.profile-edit-form__input {
+    width: 680px;
+    /* 92px(group) - label(24px) - gap(8px) = 60px */
+    height: 60px;
+    border: 1px solid #5F5F5F;
+    border-radius: 4px;
+    padding: 0 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #5F5F5F;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.profile-edit-form__input:focus {
+    border-color: #000000;
+}
+
+/* ===========================================
+   エラーメッセージ
+=========================================== */
+.profile-edit__error {
+    color: #FF5555;
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+/* ===========================================
+   更新するボタン（width:680, height:60, top:1042, left:416）
+=========================================== */
+.profile-edit-form__submit {
+    margin-top: 40px;
+}
+
+.profile-edit-form__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 680px;
+    height: 60px;
+    background-color: #FF5555;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.profile-edit-form__button:hover {
+    background-color: #e04444;
+}
+
+/* ===========================================
+   レスポンシブ：PC（1400px〜1540px）
+=========================================== */
+@media screen and (min-width: 1400px) and (max-width: 1540px) {
+
+    .profile-edit-container {
+        width: 600px;
+        padding-top: 70px;
+    }
+
+    .profile-edit__title {
+        font-size: 32px;
+        width: 260px;
+        height: 42px;
+        line-height: 42px;
+        margin-bottom: 40px;
+    }
+
+    .profile-edit-image__viewer,
+    .profile-edit-image__placeholder {
+        width: 130px;
+        height: 130px;
+    }
+
+    .profile-edit-image__button {
+        width: 160px;
+        height: 44px;
+        font-size: 13px;
+    }
+
+    .profile-edit-form__group {
+        width: 600px;
+        height: 86px;
+    }
+
+    .profile-edit-form__label {
+        font-size: 22px;
+    }
+
+    .profile-edit-form__input {
+        width: 600px;
+        height: 56px;
+        font-size: 22px;
+    }
+
+    .profile-edit-form__button {
+        width: 600px;
+        font-size: 24px;
+    }
+}
+
+/* ===========================================
+   レスポンシブ：タブレット（768px〜850px）
+=========================================== */
+@media screen and (min-width: 768px) and (max-width: 850px) {
+
+    .profile-edit-container {
+        width: 100%;
+        max-width: 680px;
+        padding: 40px 24px 60px;
+        box-sizing: border-box;
+    }
+
+    .profile-edit__title {
+        font-size: 26px;
+        width: auto;
+        height: auto;
+        line-height: 1.2;
+        text-align: center;
+        margin-bottom: 32px;
+    }
+
+    .profile-edit-image {
+        gap: 24px;
+        margin-bottom: 32px;
+    }
+
+    .profile-edit-image__viewer,
+    .profile-edit-image__placeholder {
+        width: 90px;
+        height: 90px;
+    }
+
+    .profile-edit-image__button {
+        width: 150px;
+        height: 42px;
+        font-size: 13px;
+        border-radius: 8px;
+    }
+
+    .profile-edit-form__group {
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .profile-edit-form__label {
+        font-size: 18px;
+        margin-bottom: 6px;
+    }
+
+    .profile-edit-form__input {
+        width: 100%;
+        height: 50px;
+        font-size: 18px;
+    }
+
+    .profile-edit-form__button {
+        width: 100%;
+        height: 54px;
+        font-size: 22px;
+    }
+}

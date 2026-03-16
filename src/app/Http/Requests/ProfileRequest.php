@@ -32,7 +32,6 @@ class ProfileRequest extends FormRequest
     public function messages()
     {
         return [
-            'image.image' => '画像ファイルを選択してください。',
             'image.mimes' => '画像の拡張子は.jpegまたは.pngを指定してください。',
             'name.required' => 'ユーザー名を入力してください。',
             'name.max' => 'ユーザー名は20文字以内で入力してください。',
