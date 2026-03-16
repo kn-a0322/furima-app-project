@@ -28,9 +28,6 @@ Route::middleware(['auth'])->group(function () {
 
     // ログイン ＋ 「メール認証まで終わっている人」だけができること
     Route::middleware(['verified'])->group(function () {
-        Route::get('/sell', [ItemController::class, 'sell'])->name('sell');
-        Route::get('/mypage', [ProfileController::class, 'mypage'])->name('mypage');
-
         // address ルートは {item_id} より先に定義しないと /purchase/{item_id} にマッチしてしまう
         Route::get('/purchase/address/{item_id}', [PurchaseController::class, 'addressEdit'])->name('purchase.address.edit');
         Route::post('/purchase/address/{item_id}', [PurchaseController::class, 'addressUpdate'])->name('purchase.address.update');
@@ -39,8 +36,12 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/purchase/{item_id}', [PurchaseController::class, 'purchaseStore'])->name('purchase.store');
         Route::get('/purchase/{item_id}/success', [PurchaseController::class, 'purchaseSuccess'])->name('purchase.success');
         
+        Route::get('/mypage', [ProfileController::class, 'mypage'])->name('mypage');
         Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+        Route::get('/sell', [ItemController::class, 'sell'])->name('sell');
+        Route::post('/sell', [ItemController::class, 'store'])->name('item.store');
         
     });
 });

@@ -75,4 +75,11 @@ class ItemController extends Controller
 
         return back();
     }
+
+    public function sell()
+    {
+        return view('sell');
+    }
+
+
 }
