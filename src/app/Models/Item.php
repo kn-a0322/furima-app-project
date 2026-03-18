@@ -52,10 +52,10 @@ public function comments()
 public function getConditionAttribute()
 {
     $conditions = [
-        'good' => '良好',
+        'good'            => '良好',
         'no_major_damage' => '目立った傷や汚れなし',
-        'slight_damage' => 'やや傷や汚れあり',
-        'poor' => '状態が悪い',
+        'slight_damage'   => 'やや傷や汚れあり',
+        'poor'            => '状態が悪い',
     ];
     return $conditions[$this->attributes['condition']] ?? $this->attributes['condition'];
 }

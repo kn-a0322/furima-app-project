@@ -22,24 +22,30 @@ class ExhibitionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'description' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png',
-            'category_ids' => 'required|array',//複数のカテゴリを選択できるようにarrayで指定
-            'condition_id' => 'required|integer',//商品の状態を選択できるようにintegerで指定
-            'price' => 'required|integer|min:0',                        
+            'image'        => 'required|image|mimes:jpeg,png',
+            'category_ids' => 'required|array',
+            'condition_id' => 'required|in:good,no_major_damage,slight_damage,poor',
+            'name'         => 'required|string|max:255',
+            'brand_name'   => 'nullable|string|max:255',
+            'description'  => 'required|string|max:255',
+            'price'        => 'required|integer|min:0',                        
         ];
     }
 
-    public function attributes() //attributeは属性を指定するためのメソッド
+    public function messages() 
     {
         return [
-            'name' => '商品名',
-            'description' => '商品の説明',
-            'image' => '商品画像',
-            'category_ids' => 'カテゴリ',
-            'condition_id' => '商品の状態',
-            'price' => '販売価格',
+            'name.required' => '商品名を入力してください。',
+            'description.required' => '商品の説明を入力してください。',
+            'description.string' => '商品の説明は文字列で入力してください。',
+            'description.max' => '商品の説明は255文字以内で入力してください。',
+            'image.required' => '商品画像を選択してください。',
+            'image.mimes' => '商品画像はjpegまたはpngファイルを選択してください。',
+            'category_ids.required' => 'カテゴリーを一つ以上選択してください。',
+            'condition_id.required' => '商品の状態を選択してください。',
+            'price.required' => '販売価格を入力してください。',
+            'price.integer' => '販売価格は整数で入力してください。',
+            'price.min' => '販売価格は0以上で入力してください。',
         ];
-    }
+    }       //messagesはバリデーションエラーメッセージを指定するためのメソッド
 }

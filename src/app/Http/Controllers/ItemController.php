@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Like;
 use App\Http\Requests\CommentRequest;
+use App\Http\Requests\ExhibitionRequest;
 
 class ItemController extends Controller
 {
@@ -78,8 +80,30 @@ class ItemController extends Controller
 
     public function sell()
     {
-        return view('sell');
+        $categories = Category::all();
+        return view('sell', compact('categories'));
     }
 
+    public function store(ExhibitionRequest $request)
+    {
+        // 画像を storage/app/public/images/items に保存
+        $image = $request->file('image');
+        $imagepath = $image->store('images/items', 'public');
 
+        $item = Item::create([
+            'user_id'     => auth()->id(),
+            'name'        => $request->name,
+            'brand_name'  => $request->brand_name,
+            'description' => $request->description,
+            'price'       => $request->price,
+            'image_path'  => $imagepath,
+            // condition_id（フォーム名）をそのままDBのconditionカラムに保存
+            'condition'   => $request->condition_id,
+        ]);
+
+        // 中間テーブル category_item にカテゴリを紐づける
+        $item->categories()->attach($request->category_ids);
+
+        return redirect()->route('item.index')->with('message', '商品を出品しました');
+    }
 }
