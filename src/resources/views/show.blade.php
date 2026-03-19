@@ -64,34 +64,39 @@
                 </div>
             </div>
 
-            <h3 class="show-item__section-title">コメント({{ $item->comments->count() }})</h3>
-            @foreach ($item->comments as $comment)
-                <div class="show-item__comment">
-                    <div class="show-item__comment-user">
-                        @if ($comment->user->profile && $comment->user->profile->image_path)
-                            <img src="{{ asset($comment->user->profile->image_path) }}"
-                                 alt="{{ $comment->user->name }}"
-                                 class="show-item__comment-avatar">
-                        @else
-                            <div class="show-item__comment-avatar show-item__comment-avatar--default"></div>
-                        @endif
-                        <span class="show-item__comment-username">{{ $comment->user->name }}</span>
+            <div class="show-item__comments-section">
+                <h3 class="show-item__comment-title">コメント({{ $item->comments->count() }})</h3>
+                @foreach ($item->comments as $comment)
+                    <div class="show-item__comment">
+                        <div class="show-item__comment-user">
+                            @if ($comment->user->profile && $comment->user->profile->image_path)
+                                <img src="{{ asset($comment->user->profile->image_path) }}"
+                                     alt="{{ $comment->user->name }}"
+                                     class="show-item__comment-avatar">
+                            @else
+                                <div class="show-item__comment-avatar show-item__comment-avatar--default"></div>
+                            @endif
+                            <span class="show-item__comment-username">{{ $comment->user->name }}</span>
+                        </div>
+                        <p class="show-item__comment-text">{{ $comment->comment }}</p>
                     </div>
-                    <p class="show-item__comment-text">{{ $comment->comment }}</p>
-                </div>
-            @endforeach
+                @endforeach
 
-            <h3 class="show-item__section-title">商品へのコメント</h3>
-            <form action="{{ route('comment.store', $item) }}" method="post">
-                @csrf
-                <textarea name="comment"
-                          class="show-item__comment-textarea"
-                          rows="5">{{ old('comment') }}</textarea>
-                @error('comment')
-                    <p class="show-item__comment-error">{{ $message }}</p>
-                @enderror   
-                <button type="submit" class="show-item__comment-submit">コメントを送信する</button>
-            </form>
+                <div class="show-item__comment-form">
+                    <h3 class="show-item__comment-form-title">商品へのコメント</h3>
+                    <form action="{{ route('comment.store', $item) }}" method="post">
+                        @csrf
+                        <div class="show-item__comment-textarea-wrapper">
+                            <textarea name="comment"
+                                      class="show-item__comment-textarea">{{ old('comment') }}</textarea>
+                        </div>
+                        @error('comment')
+                            <p class="show-item__comment-error">{{ $message }}</p>
+                        @enderror
+                        <button type="submit" class="show-item__comment-submit">コメントを送信する</button>
+                    </form>
+                </div>
+            </div>
 
         </div>
     </div>
