@@ -45,7 +45,7 @@
 
             <div class="form-group">
               <label for="condition_id" class="form-label-title">商品の状態</label>
-                <select name="condition_id" id="condition_id" class="form-control">
+                <select name="condition_id" id="condition_id" class="form-control" required>
                     <option value="" disabled {{ !old('condition_id') ? 'selected' : '' }}>選択してください</option>
                     <option value="good"            {{ old('condition_id') === 'good'            ? 'selected' : '' }}>良好</option>
                     <option value="no_major_damage" {{ old('condition_id') === 'no_major_damage' ? 'selected' : '' }}>目立った傷や汚れなし</option>

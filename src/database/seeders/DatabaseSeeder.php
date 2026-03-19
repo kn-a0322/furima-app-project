@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Database\Seeders\UsersTableSeeder;
 use Database\Seeders\ItemsTableSeeder;
+use Database\Seeders\CategoriesTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,6 +20,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call([
             UsersTableSeeder::class,
+            CategoriesTableSeeder::class,
             ItemsTableSeeder::class,
         ]);
         // \App\Models\User::factory()->create([
