@@ -12,7 +12,7 @@
 
         <div class="purchase__left">
             <div class="purchase-item">
-                <img src="{{ asset($item->image_path) }}" alt="{{ $item->name }}" class="purchase-item__image">
+                <img src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}" class="purchase-item__image">
                 <div class="purchase-item__detail">
                     <h2 class="purchase-item__name">{{ $item->name }}</h2>
                     <p class="purchase-item__price">¥{{ number_format($item->price) }}</p>

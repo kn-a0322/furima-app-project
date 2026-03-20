@@ -21,7 +21,7 @@ class ItemsTableSeeder extends Seeder
             'price'       => 15000,
             'brand_name'  => 'Rolax',
             'description' => 'スタイリッシュなデザインのメンズ腕時計',
-            'image_path'  => 'images/item-images/watch.jpg',
+            'image_path'  => 'images/items/watch.jpg',
             'condition'   => 'good',
             'is_sold'     => true,
         ]);
@@ -33,7 +33,7 @@ class ItemsTableSeeder extends Seeder
             'price'       => 5000,
             'brand_name'  => '西芝',
             'description' => '高速で信頼性の高いハードディスク',
-            'image_path'  => 'images/item-images/HardDisk.jpg',
+            'image_path'  => 'images/items/HardDisk.jpg',
             'condition'   => 'no_major_damage',
             'is_sold'     => false,
         ]);
@@ -45,7 +45,7 @@ class ItemsTableSeeder extends Seeder
             'price'       => 300,
             'brand_name'  => null,
             'description' => '新鮮な玉ねぎ3束のセット',
-            'image_path'  => 'images/item-images/Onion.jpg',
+            'image_path'  => 'images/items/Onion.jpg',
             'condition'   => 'slight_damage',
             'is_sold'     => false,
         ]);
@@ -57,7 +57,7 @@ class ItemsTableSeeder extends Seeder
             'price'       => 4000,
             'brand_name'  => null,
             'description' => 'クラシックなデザインの革靴',
-            'image_path'  => 'images/item-images/LeatherShoes.jpg',
+            'image_path'  => 'images/items/LeatherShoes.jpg',
             'condition'   => 'poor',
             'is_sold'     => false,
         ]);
@@ -69,7 +69,7 @@ class ItemsTableSeeder extends Seeder
             'price'       => 45000,
             'brand_name'  => null,
             'description' => '高性能なノートパソコン',
-            'image_path'  => 'images/item-images/NotePC.jpg',
+            'image_path'  => 'images/items/NotePC.jpg',
             'condition'   => 'good',
             'is_sold'     => false,
         ]);
@@ -81,7 +81,7 @@ class ItemsTableSeeder extends Seeder
             'price'       => 8000,
             'brand_name'  => null,
             'description' => '高音質のレコーディング用マイク',
-            'image_path'  => 'images/item-images/Mic.jpg',
+            'image_path'  => 'images/items/Mic.jpg',
             'condition'   => 'no_major_damage',
             'is_sold'     => false,
         ]);
@@ -93,7 +93,7 @@ class ItemsTableSeeder extends Seeder
             'price'       => 3500,
             'brand_name'  => null,
             'description' => 'おしゃれなショルダーバッグ',
-            'image_path'  => 'images/item-images/Shoulderbag.jpg',
+            'image_path'  => 'images/items/Shoulderbag.jpg',
             'condition'   => 'slight_damage',
             'is_sold'     => false,
         ]);
@@ -105,7 +105,7 @@ class ItemsTableSeeder extends Seeder
             'price'       => 500,
             'brand_name'  => null,
             'description' => '使いやすいタンブラー',
-            'image_path'  => 'images/item-images/Tumbler.jpg',
+            'image_path'  => 'images/items/Tumbler.jpg',
             'condition'   => 'poor',
             'is_sold'     => false,
         ]);
@@ -117,7 +117,7 @@ class ItemsTableSeeder extends Seeder
             'price'       => 4000,
             'brand_name'  => 'Starbacks',
             'description' => '手動のコーヒーミル',
-            'image_path'  => 'images/item-images/CoffeeGrinder.jpg',
+            'image_path'  => 'images/items/CoffeeGrinder.jpg',
             'condition'   => 'good',
             'is_sold'     => false,
         ]);
@@ -129,7 +129,7 @@ class ItemsTableSeeder extends Seeder
             'price'       => 2500,
             'brand_name'  => null,
             'description' => '便利なメイクアップセット',
-            'image_path'  => 'images/item-images/Cosmetics.jpg',
+            'image_path'  => 'images/items/Cosmetics.jpg',
             'condition'   => 'no_major_damage',
             'is_sold'     => false,
         ]);

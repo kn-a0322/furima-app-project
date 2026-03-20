@@ -23,7 +23,7 @@
     @foreach ($items as $item)
     <a href="{{ route('item.show', $item) }}" class="index-item">
         <div class="index-item__image">
-            <img src="{{ asset($item->image_path) }}" alt="{{ $item->name }}">
+            <img src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}">
             @if ($item->is_sold)
             <span class="index-item__sold-out">Sold</span>
             @endif

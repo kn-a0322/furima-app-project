@@ -8,7 +8,7 @@
 <div class="show-container">
     <div class="show-item">
         <div class="show-item__image">
-            <img src="{{ asset($item->image_path) }}" alt="{{ $item->name }}">
+            <img src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}">
         </div>
 
         <div class="show-item__detail">

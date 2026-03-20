@@ -41,7 +41,7 @@
         @foreach ($items as $item)
         <a href="{{ route('item.show', $item) }}" class="profile-item">
             <div class="profile-item__image">
-                <img src="{{ asset($item->image_path) }}" alt="{{ $item->name }}">
+                <img src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}">
                 @if ($page !== 'buy' && $item->is_sold)
                     <span class="profile-item__sold-out">Sold</span>
                 @endif
