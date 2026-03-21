@@ -71,9 +71,23 @@ return [
     | authentication or password reset when the operations are successful
     | and the user is authenticated. You are free to change this value.
     |
+    | 
     */
 
-    'home' => '/mypage/profile',
+    'home' => '/',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Feature Redirect Paths
+    |--------------------------------------------------------------------------
+    |
+    | 会員登録直後のみmypage/profile にリダイレクト
+    |
+    */
+
+    'redirects' => [
+        'register' => '/mypage/profile',
+    ],
 
     /*
     |--------------------------------------------------------------------------

@@ -47,7 +47,7 @@ class LoginRequest extends \Laravel\Fortify\Http\Requests\LoginRequest
     {
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'email' => 'ログイン情報が登録されていません',
             ]);
         }
     }
