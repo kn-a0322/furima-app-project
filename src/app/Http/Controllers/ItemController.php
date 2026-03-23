@@ -23,15 +23,19 @@ class ItemController extends Controller
             $query->where('name', 'like', "%$keyword%");
         }
 
-        if ($tab === 'mylist') {/*いいね機能実装後にクエリを修正予定！*/
-            if (auth()->check()) {/*ログインしているなら自分以外の商品を表示する*/
-                $query->where('user_id', '!=', auth()->id());
-            } else {/*ログインしていないなら商品を表示しない*/
+        if ($tab === 'mylist') {
+            if (!auth()->check()) {
                 return view('index', ['items' => []]);
             }
+        
+            $query->whereHas('likes', function ($q) {//いいねした商品を表示
+                    $q->where('user_id', auth()->id());
+            });
+
+            $query->where('user_id', '!=', auth()->id());//マイリストに自分の商品は表示しない
         } else {
             if (auth()->check()) {
-                $query->where('user_id', '!=', auth()->id());
+                $query->where('user_id', '!=', auth()->id());//おすすめ商品に自分の商品は表示しない
             }
         }
 
