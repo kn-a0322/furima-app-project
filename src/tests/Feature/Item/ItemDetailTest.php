@@ -20,7 +20,9 @@ class ItemDetailTest extends TestCase
      */
     public function test_displays_all_required_item_information(): void
     {
-        $seller = User::factory()->create();
+        $seller = User::factory()->create([
+            'email_verified_at' => now(),
+        ]);
 
         $item = Item::factory()->for($seller)->create([
             'name' => 'テスト商品',
@@ -34,12 +36,15 @@ class ItemDetailTest extends TestCase
         $category = Category::create(['content' => 'テストカテゴリ']);
         $item->categories()->attach($category->id);
 
-        $liker1 = User::factory()->create();
-        $liker2 = User::factory()->create();
+        $liker1 = User::factory()->create(['email_verified_at' => now()]);
+        $liker2 = User::factory()->create(['email_verified_at' => now()]);
         Like::create(['user_id' => $liker1->id, 'item_id' => $item->id]);
         Like::create(['user_id' => $liker2->id, 'item_id' => $item->id]);
 
-        $commentUser = User::factory()->create(['name' => 'テストコメントユーザー']);
+        $commentUser = User::factory()->create([
+            'name' => 'テストコメントユーザー',
+            'email_verified_at' => now(),
+        ]);
         Comment::create([
             'user_id' => $commentUser->id,
             'item_id' => $item->id,
@@ -49,7 +54,6 @@ class ItemDetailTest extends TestCase
         $response = $this->get(route('item.show', $item));
         $response->assertStatus(200);
 
-        // 商品画像（storage 経由のパスがHTMLに含まれる）
         $response->assertSee('storage/images/items/test-detail.jpg', false);
 
         $response->assertSee('テスト商品');
@@ -66,9 +70,9 @@ class ItemDetailTest extends TestCase
         $response->assertSee('カテゴリー');
         $response->assertSee('テストカテゴリ');
         $response->assertSee('商品の状態');
-        $response->assertSee('良好'); // accessor による日本語表示
+        $response->assertSee('良好'); 
 
-        // コメント見出しの件数・ユーザー名・本文
+        // コメントの件数・ユーザー名・コメント本文
         $response->assertSee('コメント(1)');
         $response->assertSee('テストコメントユーザー');
         $response->assertSee('テストコメント本文');

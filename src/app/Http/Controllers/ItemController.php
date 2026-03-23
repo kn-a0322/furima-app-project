@@ -54,18 +54,25 @@ class ItemController extends Controller
         return view('purchase', compact('item'));
     }
 
-    public function toggleLike(Item $item)
+    //いいねを登録
+    public function storeLike(Item $item)
     {
-        $like = $item->likes()->where('user_id', auth()->id())->first();
+        $exists = $item->likes()->where('user_id', auth()->id())->exists();
 
-        if ($like) {
-            $like->delete();
-        } else {
+        if (! $exists) {
             Like::create([
                 'item_id' => $item->id,
                 'user_id' => auth()->id(),
             ]);
         }
+
+        return back();
+    }
+
+    //いいねを解除
+    public function destroyLike(Item $item)
+    {
+        $item->likes()->where('user_id', auth()->id())->delete();
 
         return back();
     }

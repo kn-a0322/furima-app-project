@@ -42,7 +42,11 @@ public function likes()
 }
 public function isLikedBy($user)
 {
-    return $this->likes->where('user_id', $user->id)->count() > 0;
+    if (! $user) {
+        return false;
+    }
+
+    return $this->likes->contains('user_id', (int) $user->id);//intで整数型にする
 }
 
 public function comments()

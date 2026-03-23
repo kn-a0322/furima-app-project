@@ -16,6 +16,7 @@ class LoginLogoutTest extends TestCase
         User::factory()->create([
             'email' => 'test@example.com',
             'password' => bcrypt('password'),
+            'email_verified_at' => now(),
         ]);
     }
 

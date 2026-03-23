@@ -32,7 +32,9 @@ class ItemListTest extends TestCase
 
     public function test_owned_items_not_displayed(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create([
+            'email_verified_at' => now(),
+        ]);
         $this->actingAs($user);
 
         $myItems = Item::factory()->count(3)->create(['user_id' => $user->id]);
@@ -49,7 +51,9 @@ class ItemListTest extends TestCase
 
     public function test_liked_items_displayed_in_mylist(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create([
+            'email_verified_at' => now(),
+        ]);
         $this->actingAs($user);
 
         $likedItem = Item::factory()->create();
@@ -63,7 +67,9 @@ class ItemListTest extends TestCase
 
     public function test_sold_items_displayed_sold_label_in_mylist(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create([
+            'email_verified_at' => now(),
+        ]);
         $this->actingAs($user);
 
         $soldItem = Item::factory()->create([

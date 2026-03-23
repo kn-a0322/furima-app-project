@@ -20,16 +20,22 @@
             <div class="show-item__reactions">
                 <div class="show-item__reaction-item">
                     @auth
-                        <form action="{{ route('like.toggle', $item) }}" method="post">
-                            @csrf
-                            <button type="submit" class="show-item__like-button">
-                                @if ($item->isLikedBy(auth()->user()))
+                        @if ($item->isLikedBy(auth()->user()))
+                            <form action="{{ route('like.destroy', $item) }}" method="post" class="show-item__like-form">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="show-item__like-button" aria-label="いいねを解除">
                                     <img src="{{ asset('images/icons/heart-pink.png') }}" alt="いいね済み" class="show-item__reaction-icon">
-                                @else
+                                </button>
+                            </form>
+                        @else
+                            <form action="{{ route('like.store', $item) }}" method="post" class="show-item__like-form">
+                                @csrf
+                                <button type="submit" class="show-item__like-button" aria-label="いいねする">
                                     <img src="{{ asset('images/icons/heart.png') }}" alt="いいね" class="show-item__reaction-icon">
-                                @endif
-                            </button>
-                        </form>
+                                </button>
+                            </form>
+                        @endif
                     @else
                         <img src="{{ asset('images/icons/heart.png') }}" alt="いいね" class="show-item__reaction-icon">
                     @endauth

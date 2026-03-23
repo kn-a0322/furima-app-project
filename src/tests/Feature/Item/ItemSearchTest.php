@@ -35,7 +35,9 @@ class ItemSearchTest extends TestCase
     /*いいね！されていて、検索キーワードが含まれており、さらに他人が出品している商品が表示される*/
     public function test_search_keyword_applied_on_mylist(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create([
+            'email_verified_at' => now(),
+        ]);
         $this->actingAs($user);
 
         $likedMatch = Item::factory()->create(['name' => '高級な腕時計']);
