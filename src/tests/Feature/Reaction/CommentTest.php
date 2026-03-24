@@ -32,6 +32,9 @@ class CommentTest extends TestCase
             'comment' => 'テストコメント',
         ]);
         $this->assertSame(1, $item->fresh()->comments()->count());//fresh()で最新のデータを取得
+
+        $response = $this->get(route('item.show', $item));
+        $response->assertSee('テストコメント');
     }
 
     public function test_unauthenticated_user_cannot_comment_on_item(): void

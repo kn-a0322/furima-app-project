@@ -11,12 +11,17 @@ use Stripe\Stripe;
 use Stripe\Checkout\Session;
 
 class PurchaseController extends Controller
-{
+{   
     // 購入画面の表示
     public function purchase(Request $request, Item $item_id)
     {
+        $user = auth()->user();
+        $profile = $user->profile;
+        if (!$profile) {
+            return redirect()->route('profile.edit')->with('message', 'プロフィールを登録してください');
+        }
+
         $item = $item_id;
-        $profile = auth()->user()->profile;
         $selectedPayment = $request->query('payment_method', '');
         $newAddress = session('new_address');
 
