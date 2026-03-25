@@ -32,7 +32,7 @@
         <div class="profile-edit-form__group">
             <label for="name" class="profile-edit-form__label">ユーザー名</label>
             <input type="text" name="name" id="name" class="profile-edit-form__input"
-                   value="{{ old('name', $user->name) }}">
+                   value="{{ old('name', $user->name ) }}">
             @error('name')
                 <p class="profile-edit__error">{{ $message }}</p>
             @enderror
