@@ -44,15 +44,15 @@
             </div>
 
             <div class="form-group">
-              <label for="condition_id" class="form-label-title">商品の状態</label>
-                <select name="condition_id" id="condition_id" class="form-control" required>
-                    <option value="" disabled {{ !old('condition_id') ? 'selected' : '' }}>選択してください</option>
-                    <option value="good"            {{ old('condition_id') === 'good'            ? 'selected' : '' }}>良好</option>
-                    <option value="no_major_damage" {{ old('condition_id') === 'no_major_damage' ? 'selected' : '' }}>目立った傷や汚れなし</option>
-                    <option value="slight_damage"   {{ old('condition_id') === 'slight_damage'   ? 'selected' : '' }}>やや傷や汚れあり</option>
-                    <option value="poor"            {{ old('condition_id') === 'poor'            ? 'selected' : '' }}>状態が悪い</option>
+              <label for="condition" class="form-label-title">商品の状態</label>
+                <select name="condition" id="condition" class="form-control" required>
+                    <option value="" disabled {{ !old('condition') ? 'selected' : '' }}>選択してください</option>
+                    <option value="good"            {{ old('condition') === 'good'            ? 'selected' : '' }}>良好</option>
+                    <option value="no_major_damage" {{ old('condition') === 'no_major_damage' ? 'selected' : '' }}>目立った傷や汚れなし</option>
+                    <option value="slight_damage"   {{ old('condition') === 'slight_damage'   ? 'selected' : '' }}>やや傷や汚れあり</option>
+                    <option value="poor"            {{ old('condition') === 'poor'            ? 'selected' : '' }}>状態が悪い</option>
                 </select>
-            @error('condition_id')
+            @error('condition')
                 <p class="error-message">{{ $message }}</p>
             @enderror
             </div>

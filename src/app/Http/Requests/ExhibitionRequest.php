@@ -24,7 +24,7 @@ class ExhibitionRequest extends FormRequest
         return [
             'image'        => 'required|image|mimes:jpeg,png',
             'category_ids' => 'required|array',
-            'condition_id' => 'required|in:good,no_major_damage,slight_damage,poor',
+            'condition' => 'required|in:good,no_major_damage,slight_damage,poor',
             'name'         => 'required|string|max:255',
             'brand_name'   => 'nullable|string|max:255',
             'description'  => 'required|string|max:255',
@@ -42,7 +42,7 @@ class ExhibitionRequest extends FormRequest
             'image.required' => '商品画像を選択してください。',
             'image.mimes' => '商品画像はjpegまたはpngファイルを選択してください。',
             'category_ids.required' => 'カテゴリーを一つ以上選択してください。',
-            'condition_id.required' => '商品の状態を選択してください。',
+            'condition.required' => '商品の状態を選択してください。',
             'price.required' => '販売価格を入力してください。',
             'price.integer' => '販売価格は整数で入力してください。',
             'price.min' => '販売価格は0以上で入力してください。',

@@ -108,8 +108,7 @@ class ItemController extends Controller
             'description' => $request->description,
             'price'       => $request->price,
             'image_path'  => $imagepath,
-            // condition_id（フォーム名）をそのままDBのconditionカラムに保存
-            'condition'   => $request->condition_id,
+            'condition'   => $request->condition,
         ]);
 
         // 中間テーブル category_item にカテゴリを紐づける
