@@ -2,6 +2,20 @@
    マイページ（プロフィール画面）
 =========================================== */
 
+/* フラッシュメッセージ（トップの .success-message と同系統） */
+.success-message {
+    max-width: 1512px;
+    margin: 20px auto 0;
+    padding: 16px 24px;
+    background-color: #D4EDDA;
+    color: #155724;
+    border: 1px solid #C3E6CB;
+    border-radius: 4px;
+    font-size: 18px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
 .profile-container {
     width: 100%;
     max-width: 1512px;

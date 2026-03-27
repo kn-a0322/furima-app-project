@@ -14,18 +14,25 @@
             <div class="purchase-item">
                 <img src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}" class="purchase-item__image">
                 <div class="purchase-item__detail">
-                    <h2 class="purchase-item__name">{{ $item->name }}</h2>
+                    <h1 class="purchase-item__name">{{ $item->name }}</h1>
                     <p class="purchase-item__price">¥{{ number_format($item->price) }}</p>
                 </div>
             </div>
 
+            @php
+                $rawPayment = old('payment_method', $selectedPayment);
+                $paymentMethod = in_array($rawPayment, ['convenience_store', 'credit_card'], true)
+                    ? $rawPayment
+                    : '';
+            @endphp
             <div class="purchase-payment">
-                <h3 class="purchase-payment__title">支払い方法</h3>
+                <h2 class="purchase-payment__title">支払い方法</h2>
                 <div class="purchase-payment__select-wrapper">
-                    <select id="payment_method" name="payment_method" class="purchase-payment__select">
-                        <option value="" disabled {{ !old('payment_method') ? 'selected' : '' }}>選択してください</option>
-                        <option value="convenience_store" {{ old('payment_method') === 'convenience_store' ? 'selected' : '' }}>コンビニ払い</option>
-                        <option value="credit_card" {{ old('payment_method') === 'credit_card' ? 'selected' : '' }}>カード支払い</option>
+                    {{-- hidden: 開いたリストには出さない / disabled: そのままでは送信されない --}}
+                    <select id="payment_method" name="payment_method" class="purchase-payment__select" required>
+                        <option value="" disabled hidden {{ $paymentMethod === '' ? 'selected' : '' }}>選択してください</option>
+                        <option value="convenience_store" {{ $paymentMethod === 'convenience_store' ? 'selected' : '' }}>コンビニ払い</option>
+                        <option value="credit_card" {{ $paymentMethod === 'credit_card' ? 'selected' : '' }}>カード支払い</option>
                     </select>
                 </div>
                 @error('payment_method')
@@ -35,7 +42,7 @@
 
             <div class="purchase-delivery">
                 <div class="purchase-delivery__header">
-                    <h3 class="purchase-delivery__title">配送先</h3>
+                    <h2 class="purchase-delivery__title">配送先</h2>
                     <a href="{{ route('purchase.address.edit', $item->id) }}" class="purchase-delivery__change-link">変更する</a>
                 </div>
                 @if ($displayPostcode)
@@ -62,7 +69,13 @@
                     <th class="purchase-summary__label">支払い方法</th>
                     {{-- JavaScriptで左側のselectと連動して書き換えられる --}}
                     <td class="purchase-summary__value" id="payment-display">
-                        {{ old('payment_method') === 'convenience_store' ? 'コンビニ払い' : (old('payment_method') === 'credit_card' ? 'カード支払い' : '') }}
+                        @if ($paymentMethod === '')
+                            選択してください
+                        @elseif ($paymentMethod === 'credit_card')
+                            カード支払い
+                        @else
+                            コンビニ払い
+                        @endif
                     </td>
                 </tr>
             </table>
@@ -81,9 +94,11 @@
         'credit_card':       'カード支払い',
     };
 
-    // selectの値が変わるたびに右側の表示を更新する
-    select.addEventListener('change', function () {
-        display.textContent = labels[this.value] ?? '';
-    });
+    function syncPaymentDisplay() {
+        const v = select.value;
+        display.textContent = v === '' ? '選択してください' : (labels[v] ?? '');
+    }
+    select.addEventListener('change', syncPaymentDisplay);
+    syncPaymentDisplay();
 </script>
 @endsection

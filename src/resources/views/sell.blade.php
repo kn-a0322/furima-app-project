@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="sell-container">
-    <h2 class="sell-title">商品の出品</h2>
+    <h1 class="sell-title">商品の出品</h1>
 
     <form action="{{ route('item.store') }}" method="post" enctype="multipart/form-data">
         @csrf
@@ -43,14 +43,21 @@
             @enderror
             </div>
 
+            @php
+                $conditionValue = old('condition');
+                if (! in_array($conditionValue, ['good', 'no_major_damage', 'slight_damage', 'poor'], true)) {
+                    $conditionValue = '';
+                }
+            @endphp
             <div class="form-group">
               <label for="condition" class="form-label-title">商品の状態</label>
+                {{-- hidden: 開いたリストに「選択してください」を出さない / disabled: 未選択時は送信されない --}}
                 <select name="condition" id="condition" class="form-control" required>
-                    <option value="" disabled {{ !old('condition') ? 'selected' : '' }}>選択してください</option>
-                    <option value="good"            {{ old('condition') === 'good'            ? 'selected' : '' }}>良好</option>
-                    <option value="no_major_damage" {{ old('condition') === 'no_major_damage' ? 'selected' : '' }}>目立った傷や汚れなし</option>
-                    <option value="slight_damage"   {{ old('condition') === 'slight_damage'   ? 'selected' : '' }}>やや傷や汚れあり</option>
-                    <option value="poor"            {{ old('condition') === 'poor'            ? 'selected' : '' }}>状態が悪い</option>
+                    <option value="" disabled hidden {{ $conditionValue === '' ? 'selected' : '' }}>選択してください</option>
+                    <option value="good"            {{ $conditionValue === 'good'            ? 'selected' : '' }}>良好</option>
+                    <option value="no_major_damage" {{ $conditionValue === 'no_major_damage' ? 'selected' : '' }}>目立った傷や汚れなし</option>
+                    <option value="slight_damage"   {{ $conditionValue === 'slight_damage'   ? 'selected' : '' }}>やや傷や汚れあり</option>
+                    <option value="poor"            {{ $conditionValue === 'poor'            ? 'selected' : '' }}>状態が悪い</option>
                 </select>
             @error('condition')
                 <p class="error-message">{{ $message }}</p>

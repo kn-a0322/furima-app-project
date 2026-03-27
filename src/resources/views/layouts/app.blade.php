@@ -16,14 +16,14 @@
 <body>
 <div class="app">
     <header class="header">
-      <h1 class="header__heading">
+      <a href="{{ route('item.index') }}" class="header__logo" aria-label="{{ config('app.name', 'Furima') }} トップへ">
         <img src="{{ asset('images/logo/COACHTECHヘッダーロゴ.png') }}" alt="COACHTECH">
-      </h1>
+      </a>
       @yield('link')
       @if (!Route::is('login') && !Route::is('register') && !Route::is('verify-email'))
       <nav class="header-nav">
         <form class="header-nav__search-form" action="{{ route('item.index') }}" method="get">
-          <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="なにをお探しですか？">
+          <input type="text" class="header-nav__search-input" name="keyword" value="{{ request('keyword') }}" placeholder="なにをお探しですか？" autocomplete="off">
         </form>
         @if (Auth::check())
           <form action="{{ route('logout') }}" method="post">

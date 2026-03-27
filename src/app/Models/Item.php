@@ -20,48 +20,49 @@ class Item extends Model
         'is_sold',
     ];
 
-
-public function user()
-{
-    return $this->belongsTo(User::class);
-}
-
-public function order()
-{
-    return $this->hasOne(Order::class);
-}
-
-public function categories()
-{
-    return $this->belongsToMany(Category::class, 'category_item');
-}
-
-public function likes()
-{
-    return $this->hasMany(Like::class);
-}
-public function isLikedBy($user)
-{
-    if (! $user) {
-        return false;
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
-    return $this->likes->contains('user_id', (int) $user->id);//intで整数型にする
-}
+    public function order()
+    {
+        return $this->hasOne(Order::class);
+    }
 
-public function comments()
-{
-    return $this->hasMany(Comment::class);
-}
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'category_item');
+    }
 
-public function getConditionAttribute()
-{
-    $conditions = [
-        'good'            => '良好',
-        'no_major_damage' => '目立った傷や汚れなし',
-        'slight_damage'   => 'やや傷や汚れあり',
-        'poor'            => '状態が悪い',
-    ];
-    return $conditions[$this->attributes['condition']] ?? $this->attributes['condition'];
-}
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function isLikedBy($user)
+    {
+        if (! $user) {
+            return false;
+        }
+
+        return $this->likes->contains('user_id', (int) $user->id);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function getConditionAttribute()
+    {
+        $conditions = [
+            'good'            => '良好',
+            'no_major_damage' => '目立った傷や汚れなし',
+            'slight_damage'   => 'やや傷や汚れあり',
+            'poor'            => '状態が悪い',
+        ];
+
+        return $conditions[$this->attributes['condition']] ?? $this->attributes['condition'];
+    }
 }

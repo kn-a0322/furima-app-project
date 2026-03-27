@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="profile-edit-container">
-    <h2 class="profile-edit__title">プロフィール設定</h2>
+    <h1 class="profile-edit__title">プロフィール設定</h1>
 
     <form action="{{ route('profile.update') }}" method="post" enctype="multipart/form-data" class="profile-edit-form">
         @csrf

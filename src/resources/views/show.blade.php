@@ -13,7 +13,7 @@
 
         <div class="show-item__detail">
 
-            <h2 class="show-item__name">{{ $item->name }}</h2>
+            <h1 class="show-item__name">{{ $item->name }}</h1>
             <p class="show-item__brand">{{ $item->brand_name }}</p>
             <p class="show-item__price">¥{{ number_format($item->price) }}<span>（税込）</span></p>
 
@@ -49,10 +49,10 @@
 
             <a href="{{ route('purchase', $item) }}" class="show-item__buy-button">購入手続きへ</a>
 
-            <h3 class="show-item__section-title">商品説明</h3>
+            <h2 class="show-item__section-title">商品説明</h2>
             <p class="show-item__description">{{ $item->description }}</p>
 
-            <h3 class="show-item__section-title">商品の情報</h3>
+            <h2 class="show-item__section-title">商品の情報</h2>
             <div class="show-item__info">
                 <div class="show-item__info-row">
                     <span class="show-item__info-label">カテゴリー</span>
@@ -71,12 +71,12 @@
             </div>
 
             <div class="show-item__comments-section">
-                <h3 class="show-item__comment-title">コメント({{ $item->comments->count() }})</h3>
+                <h2 class="show-item__comment-title">コメント({{ $item->comments->count() }})</h2>
                 @foreach ($item->comments as $comment)
                     <div class="show-item__comment">
                         <div class="show-item__comment-user">
                             @if ($comment->user->profile && $comment->user->profile->image_path)
-                                <img src="{{ asset($comment->user->profile->image_path) }}"
+                                <img src="{{ asset('storage/' . $comment->user->profile->image_path) }}"
                                      alt="{{ $comment->user->name }}"
                                      class="show-item__comment-avatar">
                             @else

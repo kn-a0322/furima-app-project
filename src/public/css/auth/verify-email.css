@@ -10,6 +10,14 @@
     text-align: center;
 }
 
+.verify-email__title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333333;
+    margin-bottom: 24px;
+    line-height: 1.4;
+}
+
 /* メッセージテキスト */
 .verify-email__message {
     font-size: 24px;

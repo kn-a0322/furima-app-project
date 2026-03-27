@@ -5,6 +5,10 @@
 @endsection
 
 @section('content')
+@if (session('message'))
+    <div class="success-message">{{ session('message') }}</div>
+@endif
+<h1 class="visually-hidden">マイページ</h1>
 <div class="profile-container">
     <div class="profile-header">
         <div class="profile-header__user">

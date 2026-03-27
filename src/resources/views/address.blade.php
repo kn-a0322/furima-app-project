@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="address-container">
-    <h2 class="address-title">住所の変更</h2>
+    <h1 class="address-title">住所の変更</h1>
     <form action="{{ route('purchase.address.update', $item->id) }}" method="post" class="address-form">
         @csrf
         <div class="address-form__group">
