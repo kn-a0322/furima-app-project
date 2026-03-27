@@ -5,6 +5,7 @@ namespace Tests\Feature\Auth;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\User;
+use App\Models\Profile;
 
 class LoginLogoutTest extends TestCase
 {
@@ -63,6 +64,20 @@ class LoginLogoutTest extends TestCase
             'email' => 'test@example.com',
             'password' => 'password',
         ]);
+        $response->assertRedirect(route('profile.edit'));
+        $this->assertAuthenticated();
+    }
+
+    public function test_login_success_redirects_home_when_profile_exists(): void
+    {
+        $user = User::where('email', 'test@example.com')->firstOrFail();
+        Profile::create(['user_id' => $user->id]);
+
+        $response = $this->post('/login', [
+            'email' => 'test@example.com',
+            'password' => 'password',
+        ]);
+
         $response->assertRedirect('/');
         $this->assertAuthenticated();
     }

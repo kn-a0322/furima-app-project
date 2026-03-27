@@ -76,7 +76,7 @@ class RegisterTest extends TestCase
             'password' => '12345678',
             'password_confirmation' => '12345678',
         ]);
-        $response->assertRedirect('/mypage/profile');
+        $response->assertRedirect(route('verification.notice'));
 
         $this->assertDatabaseHas('users', [
             'name' => 'test',

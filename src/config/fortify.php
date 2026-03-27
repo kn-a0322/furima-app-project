@@ -81,12 +81,13 @@ return [
     | Feature Redirect Paths
     |--------------------------------------------------------------------------
     |
-    | 会員登録直後のみmypage/profile にリダイレクト
+    | 会員登録後の遷移は RegisterResponse（メール認証案内）。
+    | ログイン後・認証完了後のプロフィール誘導は各 Response クラスでコントロール。
     |
     */
 
     'redirects' => [
-        'register' => '/mypage/profile',
+        //
     ],
 
     /*

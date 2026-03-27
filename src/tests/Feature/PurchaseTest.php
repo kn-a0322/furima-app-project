@@ -120,9 +120,9 @@ class PurchaseTest extends TestCase
         $item = Item::factory()->create();
 
         $response = $this->actingAs($user)->post(route('purchase.address.update', ['item_id' => $item->id]), [
-            'shipping_postcode' => '111-1111',
-            'shipping_address' => '変更後テストアドレス',
-            'shipping_building' => '変更後テストビル',
+            'postcode' => '111-1111',
+            'address' => '変更後テストアドレス',
+            'building' => '変更後テストビル',
         ]);
 
         $response = $this->get(route('purchase', $item->id));
