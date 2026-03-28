@@ -1,69 +1,50 @@
 # Furima（フリマアプリ）
 
-## プロジェクト概要
+個人間で商品を出品・購入できるフリーマーケットアプリケーションです。
 
-Furimaは、個人間で商品を売買できるフリーマーケットアプリケーションです。
-ユーザーは商品を出品し、他のユーザーが購入できるプラットフォームを提供します。
+## 概要
 
-### 主な機能
+ユーザー登録後、商品の出品・閲覧・購入、プロフィール編集、いいね・コメント、キーワード検索などが利用できます。
+購入フローでは Stripe を利用した決済画面へ遷移します。
 
-- ユーザー登録・ログイン機能
-- 商品の出品・閲覧・購入機能
-- プロフィール管理機能
-- 商品のいいね機能
-- 商品へのコメント機能
-- カテゴリー別の商品検索機能
-- 購入履歴・出品履歴の管理
+## 主な機能
 
-## 使用技術
-- **PHP**: 8.2.11
-- **Laravel**: 10.x
-- **MySQL**: 8.0.26
-- **nginx**: 1.21.1
+- 会員登録・ログイン・メール認証（Laravel Fortify）
+- 商品一覧・詳細・キーワード検索・マイリスト表示
+- 商品の出品（画像・カテゴリー・状態など）
+- 購入手続き（配送先の一時変更、Stripeによる決済）
+- マイページ（出品一覧・購入一覧）
+- プロフィール（画像・住所など）の編集
+- いいね・コメント
 
+## 環境構築
 
-## 環境構築手順
+### 前提
 
-### 必要な環境
-
-- Docker Desktop
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) が利用できること
 - Git
 
-### セットアップ手順
+### Docker のビルドと起動
 
-1. **リポジトリのクローン**
 ```bash
-git clone <repository-url>
+git clone https://github.com/kn-a0322/furima-app-project.git
 cd furima-app-project
+docker-compose up -d --build
 ```
 
-2. **Docker環境の起動**
-```bash
-docker-compose up -d
-```
+### Laravel 環境（PHP コンテナ内）
 
-3. **PHPコンテナに入る**
 ```bash
 docker-compose exec php bash
-```
-
-4. **Composerパッケージのインストール**
-```bash
+cd /var/www
 composer install
-```
-
-5. **環境変数ファイルの設定**
-```bash
 cp .env.example .env
-```
-
-6. **アプリケーションキーの生成**
-```bash
 php artisan key:generate
 ```
 
-7. **.envファイルのデータベース設定を編集**
-```
+`.env` を編集し、環境変数を変更してください。
+
+```env
 DB_CONNECTION=mysql
 DB_HOST=mysql
 DB_PORT=3306
@@ -72,45 +53,84 @@ DB_USERNAME=laravel_user
 DB_PASSWORD=laravel_pass
 ```
 
-8. **データベースのマイグレーション**
+続けてマイグレーションとシーディング、公開ストレージのシンボリックリンクを作成します。
+
 ```bash
 php artisan migrate
+php artisan db:seed
+php artisan storage:link
 ```
 
 
-### アクセスURL
+### 購入機能をテストする場合
 
-- **アプリケーション**: http://localhost
-- **phpMyAdmin**: http://localhost:8080
-  - ユーザー名: `laravel_user`
-  - パスワード: `laravel_pass`
+Stripe のご自身のテストキーを `.env` に設定してください。
 
-### Docker環境の停止
+```env
+STRIPE_SECRET=sk_test_...
+```
+
+### コンテナの停止
+
+プロジェクトルートで実行します。
 
 ```bash
 docker-compose down
 ```
 
-## ER図
+## 使用技術（実行環境）
 
-このプロジェクトのデータベース設計は以下のER図に基づいています。
-
-詳細は `docs/ER.drawio` ファイルをご参照ください。
-
-### リレーション
-
-- **users - profiles**: 1対1の関係
-- **users - items**: 1対多の関係（出品）
-- **users - orders**: 1対多の関係（購入）
-- **users - likes**: 1対多の関係
-- **users - comments**: 1対多の関係
-- **items - orders**: 1対0..1の関係
-- **items - category_item**: 1対多の関係
-- **categories - category_item**: 1対多の関係
-- **items - likes**: 1対多の関係
-- **items - comments**: 1対多の関係
-
----
+| 区分 | 技術・バージョン（目安） |
+|------|-------------------------|
+| 言語 | PHP 8.1 |
+| フレームワーク | Laravel 10.x |
+| 認証 | Laravel Fortify |
+| 決済 API | Stripe（`stripe/stripe-php`） |
+| データベース | MySQL 8.0.26 |
+| Web サーバー | nginx 1.21.1 |
+| その他 | Docker / Compose、phpMyAdmin |
 
 
+## ER 図
+
+データベース設計の概要は以下の画像を参照してください。編集用のソースは `docs/ER.drawio` にあります。
+
+![ER図](docs/er-diagram.png)
+
+## URL
+
+| 用途 | URL（開発環境） |
+|------|-----------------|
+| アプリトップ（商品一覧） | http://localhost/ |
+| 会員登録 | http://localhost/register |
+| ログイン | http://localhost/login |
+| phpMyAdmin | http://localhost:8080/ |
+
+phpMyAdmin のログイン例（`docker-compose.yml` に合わせた値）:
+
+- サーバー: `mysql`
+- ユーザー名: `laravel_user`
+- パスワード: `laravel_pass`
+
+## テスト用ログイン情報
+
+`php artisan db:seed` 実行後、`UsersTableSeeder` で登録されるユーザーです。
+本アプリケーションでは管理者権限の機能は実装しておりません。動作確認の際は、以下のユーザーアカウントをご利用ください。
+
+| 表示名 | メールアドレス | パスワード |
+|--------|----------------|------------|
+| 山田太郎 | `test1@example.com` | `password` |
+| 山田花子 | `test2@example.com` | `password` |
+
+シーダー登録済みのユーザーはメール認証済み状態となっています。
+新規会員登録からのメール認証フローを確認したい場合は、別途「会員登録」画面から新しいメールアドレスで登録を行なってください。
+
+
+## テストの実行
+
+PHP コンテナ内で、プロジェクトルート（`/var/www`）から実行します。
+
+```bash
+php artisan test
+```
 

@@ -12,7 +12,6 @@ use Stripe\Checkout\Session;
 
 class PurchaseController extends Controller
 {   
-    // 購入画面の表示
     public function purchase(Request $request, Item $item_id)
     {
         $user = auth()->user();
@@ -75,12 +74,11 @@ class PurchaseController extends Controller
         return redirect()->away($session->url);
     }
 
-    // Stripe決済完了後の処理（success_url から遷移してくる）
+    // Stripe決済完了後の処理
     public function purchaseSuccess(Item $item_id)
     {
         $item = $item_id;
 
-        // セッションに保存しておいた注文データを取り出す
         $orderData = session('pending_order');
 
         Order::create([
@@ -95,8 +93,8 @@ class PurchaseController extends Controller
 
         $item->update(['is_sold' => true]);
 
-        // 使い終わったセッションデータを削除する
-        session()->forget('pending_order');
+        // 使い終わったセッションデータを削除し、プロフィールの情報へリセットする
+        session()->forget(['pending_order', 'new_address']);
 
         return redirect()->route('item.index')->with('message', '購入が完了しました');
     }

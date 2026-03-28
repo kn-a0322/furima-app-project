@@ -1,8 +1,4 @@
-/* ===========================================
-   商品出品画面
-=========================================== */
 
-/* コンテナ（width: 680、left: 416 を中央寄せで再現）*/
 .sell-container {
     width: 680px;
     margin: 0 auto;
@@ -10,10 +6,7 @@
     box-sizing: border-box;
 }
 
-/* ===========================================
-   タイトル（width:180, height:44, top:131, left:651）
-   コンテナ内中央: (680-180)/2 = 250px → text-align: center で実現
-=========================================== */
+
 .sell-title {
     font-family: 'Inter', sans-serif;
     font-size: 36px;
@@ -23,18 +16,15 @@
     height: 44px;
     line-height: 44px;
     text-align: center;
-    margin: 0 auto 43px; /* 下余白: image top(218) - title bottom(131+44=175) = 43px */
+    margin: 0 auto 43px; 
 }
 
-/* ===========================================
-   商品画像エリア（width:680, height:186, top:218, left:416）
-=========================================== */
+
 .form-group {
     width: 680px;
     margin-bottom: 28px;
 }
 
-/* 「商品画像」ラベル: 左詰め, Bold, 24px */
 .form-label-title {
     display: block;
     font-family: 'Inter', sans-serif;
@@ -44,7 +34,7 @@
     margin-bottom: 8px;
 }
 
-/* 画像アップロードボックス（width:680, height:150, dashed border 1px #F5F5F5）*/
+
 .item-image-upload {
     width: 680px;
     height: 150px;
@@ -56,7 +46,7 @@
     box-sizing: border-box;
 }
 
-/* 「画像を選択する」ボタン（width:165, height:44, border-radius:10px, border:2px #FF5555）*/
+/* 「画像を選択する」ボタン*/
 .image-upload-button {
     display: inline-flex;
     align-items: center;
@@ -78,15 +68,11 @@
     color: #FFFFFF;
 }
 
-/* ファイルinputは非表示にしてlabelで代替 */
 .image-upload-input {
     display: none;
 }
 
-/* ===========================================
-   セクションタイトル（「商品の詳細」「商品名と説明」）
-   Bold, 30px, #5F5F5F + 下線 680px 1px #5F5F5F
-=========================================== */
+
 .form-section {
     width: 680px;
     margin-bottom: 48px;
@@ -105,10 +91,7 @@
     box-sizing: border-box;
 }
 
-/* ===========================================
-   カテゴリーエリア（width:680, height:235）
-   各ラベルタイトル共通: Bold, 24px
-=========================================== */
+/* カテゴリーエリア*/
 .form-label-title {
     font-family: 'Inter', sans-serif;
     font-size: 24px;
@@ -118,7 +101,7 @@
     margin-bottom: 14px;
 }
 
-/* カテゴリーのタグ群をflex折り返しで配置 */
+/* カテゴリーのタグ群をflex折り返し*/
 .category-selects {
     display: flex;
     flex-wrap: wrap;
@@ -127,13 +110,12 @@
     padding: 14px 0 22px;
 }
 
-/* 各カテゴリーのラベル（ピル型ボタン）
-   高さ: 32px, 半径: 200px, ボーダー: 2px #FF5655, テキスト: #FF5655 */
+/* 各カテゴリーのラベル*/
 .category-label {
     display: inline-flex;
     align-items: center;
-    height: 36px;        /* 上下を少し広く */
-    padding: 0 20px;     /* 左右余白を広く */
+    height: 36px;        
+    padding: 0 20px;     
     border: 2px solid #FF5655;
     border-radius: 200px;
     color: #FF5655;
@@ -156,10 +138,7 @@
     color: #FFFFFF;
 }
 
-/* ===========================================
-   テキストボックス共通（description 以外）
-   width:680, height:45, border:1px #5F5F5F
-=========================================== */
+
 .form-control {
     width: 680px;
     height: 45px;
@@ -178,17 +157,10 @@
     border-color: #000000;
 }
 
-/* ===========================================
-   「商品の状態」セレクト
-   プレースホルダー「選択してください」: Bold, 16px, #5F5F5F
-   Polygon1: width:18, height:20, #5F5F5F, 右から16px
-=========================================== */
-/* name は condition（旧 condition_id から変更） */
+
 .form-control[name="condition"] {
-    /* ドロップダウン全体ボーダー: 1.5px #B1B1B1 */
     border: 1.5px solid #B1B1B1;
 
-    /* Polygon1: 18×20px、#5F5F5F、右端（設計値に合わせ right 16px 相当） */
     appearance: none;
     -webkit-appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='20' viewBox='0 0 18 20'%3E%3Cpolygon points='9,20 0,0 18,0' fill='%235F5F5F'/%3E%3C/svg%3E");
@@ -201,19 +173,16 @@
     cursor: pointer;
 }
 
-/* 未選択時（:invalid）: 「選択してください」 Bold 16px #5F5F5F */
 .form-control[name="condition"]:invalid {
     color: #5F5F5F;
     font-weight: 700;
     font-size: 16px;
 }
 
-/* 選択済みは黒文字 */
 .form-control[name="condition"]:valid {
     color: #000000;
 }
 
-/* ---- 以下は Firefox 等で効く場合あり（Chrome/Safari はブラウザが無視することが多い） ---- */
 
 .form-control[name="condition"] option {
     background-color: #636769;
@@ -227,16 +196,12 @@
     display: none;
 }
 
-/* ===========================================
-   カテゴリー間隔を少し広く
-=========================================== */
+/* カテゴリー間隔を少し広く*/
 .category-selects {
     gap: 14px;
 }
 
-/* ===========================================
-   商品の説明 textarea（width:680, height:125, border-radius:4px, border:1px #5F5F5F）
-=========================================== */
+/* 商品の説明 textarea*/
 textarea.form-control {
     height: 125px;
     padding: 10px 12px;
@@ -244,9 +209,7 @@ textarea.form-control {
     border-radius: 4px;
 }
 
-/* ===========================================
-   販売価格（¥マーク: Bold 24px、入力欄内左端）
-=========================================== */
+/* 販売価格*/
 .price-input-wrapper {
     display: flex;
     align-items: center;
@@ -285,9 +248,7 @@ textarea.form-control {
     border: none;
 }
 
-/* ===========================================
-   出品するボタン（width:680, height:60, border-radius:5px）
-=========================================== */
+
 .sell-form__submit {
     margin-top: 64px;
 }
@@ -313,18 +274,14 @@ textarea.form-control {
     background-color: #e04444;
 }
 
-/* ===========================================
-   エラーメッセージ
-=========================================== */
+
 .error-message {
     color: #FF5555;
     font-size: 14px;
     margin-top: 6px;
 }
 
-/* ===========================================
-   レスポンシブ：PC（1400px〜1540px）
-=========================================== */
+/* レスポンシブ：PC（1400px〜1540px）*/
 @media screen and (min-width: 1400px) and (max-width: 1540px) {
 
     .sell-container {
@@ -371,9 +328,7 @@ textarea.form-control {
     }
 }
 
-/* ===========================================
-   レスポンシブ：タブレット（768px〜850px）
-=========================================== */
+/* レスポンシブ：タブレット（768px〜850px）*/
 @media screen and (min-width: 768px) and (max-width: 850px) {
 
     .sell-container {

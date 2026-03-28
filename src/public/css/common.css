@@ -54,7 +54,7 @@ body {
     margin-left: 60px;
 }
 
-/* 検索フォーム（可変幅） */
+/* 検索フォーム */
 .header-nav__search-form {
     display: flex;
     align-items: center;
@@ -75,7 +75,6 @@ body {
     background-color: #ffffff;
 }
 
-/* ログインリンク */
 .header-nav__login-link {
     display: flex;
     align-items: center;
@@ -89,7 +88,6 @@ body {
     text-decoration: none;
 }
 
-/* ログアウトボタン */
 .header-nav__logout-button {
     display: flex;
     align-items: center;
@@ -106,7 +104,6 @@ body {
     padding: 0;
 }
 
-/* マイページリンク */
 .header-nav__mypage-link {
     display: flex;
     align-items: center;
@@ -119,7 +116,6 @@ body {
     white-space: nowrap;
 }
 
-/* 出品ボタン */
 .header-nav__sell-link {
     display: flex;
     align-items: center;

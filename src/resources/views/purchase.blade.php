@@ -28,7 +28,6 @@
             <div class="purchase-payment">
                 <h2 class="purchase-payment__title">支払い方法</h2>
                 <div class="purchase-payment__select-wrapper">
-                    {{-- hidden: 開いたリストには出さない / disabled: そのままでは送信されない --}}
                     <select id="payment_method" name="payment_method" class="purchase-payment__select" required>
                         <option value="" disabled hidden {{ $paymentMethod === '' ? 'selected' : '' }}>選択してください</option>
                         <option value="convenience_store" {{ $paymentMethod === 'convenience_store' ? 'selected' : '' }}>コンビニ払い</option>
@@ -67,7 +66,7 @@
                 </tr>
                 <tr class="purchase-summary__row">
                     <th class="purchase-summary__label">支払い方法</th>
-                    {{-- JavaScriptで左側のselectと連動して書き換えられる --}}
+                    {{-- JavaScriptで左側のselectと連動させる --}}
                     <td class="purchase-summary__value" id="payment-display">
                         @if ($paymentMethod === '')
                             選択してください
@@ -88,7 +87,6 @@
     const select = document.getElementById('payment_method');
     const display = document.getElementById('payment-display');
 
-    // 選択値と表示ラベルの対応
     const labels = {
         'convenience_store': 'コンビニ払い',
         'credit_card':       'カード支払い',

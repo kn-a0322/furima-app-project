@@ -7,7 +7,6 @@ use App\Http\Requests\ProfileRequest;
 
 class ProfileController extends Controller
 {
-    // マイページ（出品・購入タブ切り替え）
     public function mypage(Request $request)
     {
         $user    = auth()->user();
@@ -15,17 +14,14 @@ class ProfileController extends Controller
         $page    = $request->query('page', 'sell');
 
         if ($page === 'buy') {
-            // 購入した商品：注文を経由してItemを取得
             $items = $user->orders()->with('item')->get()->pluck('item');//pluck('item')でItemモデルのコレクションを取得
         } else {
-            // 出品した商品：自分が出品したItem
             $items = $user->items;
         }
 
         return view('mypage', compact('user', 'profile', 'items', 'page'));
     }
 
-    // プロフィール編集画面
     public function edit()
     {
         $user    = auth()->user();
@@ -34,12 +30,10 @@ class ProfileController extends Controller
         return view('profile_edit', compact('user', 'profile'));
     }
 
-    // プロフィール更新処理
     public function update(ProfileRequest $request)
     {
         $user = auth()->user();
 
-        // Userテーブル（名前）を更新
         $user->update([
             'name' => $request->name,
         ]);

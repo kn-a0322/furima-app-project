@@ -14,10 +14,7 @@ class ItemDetailTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * ① 商品詳細に必要な情報が表示される
-     * （画像・名前・ブランド・価格・いいね数・コメント数・説明・カテゴリ・状態・コメント欄のユーザー・内容）
-     */
+    /*① 商品詳細に必要な情報が表示される */
     public function test_displays_all_required_item_information(): void
     {
         $seller = User::factory()->create([
@@ -78,9 +75,7 @@ class ItemDetailTest extends TestCase
         $response->assertSee('テストコメント本文');
     }
 
-    /**
-     * ② 複数選択されたカテゴリーがすべて表示される
-     */
+    /*② 複数選択されたカテゴリーがすべて表示される*/
     public function test_displays_all_selected_categories(): void
     {
         $item = Item::factory()->create();

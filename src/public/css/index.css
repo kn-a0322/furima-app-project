@@ -1,7 +1,3 @@
-/* ===========================================
-   商品一覧画面（トップページ）
-=========================================== */
-
 /* 全体コンテナ */
 .index-container {
     width: 100%;
@@ -11,9 +7,7 @@
     box-sizing: border-box;
 }
 
-/* ===========================================
-   購入完了メッセージ
-=========================================== */
+/*購入完了メッセージ*/
 .success-message {
     max-width: 1512px;
     margin: 20px auto 0;
@@ -26,9 +20,6 @@
     text-align: center;
 }
 
-/* ===========================================
-   タブエリア
-=========================================== */
 .index-tabs {
     width: 100%;
     max-width: 1512px;
@@ -64,25 +55,21 @@
     box-sizing: border-box;
 }
 
-/* アクティブタブ */
 .index-tabs__link.is-active {
     color: #FF0000;
 }
 
 
-/* 最初のタブ（おすすめ）に左マージン */
+/* おすすめタブの位置調整 */
 .index-tabs__item:first-child .index-tabs__link {
     margin-left: 130px;
 }
 
-/* 2番目のタブ（マイリスト）の位置調整 */
+/* マイリストタブの位置調整 */
 .index-tabs__item:nth-child(2) .index-tabs__link {
-    margin-left: 50px; /* 130px + 155px + 50px = 335px */
+    margin-left: 50px; 
 }
 
-/* ===========================================
-   商品グリッド
-=========================================== */
 .index-item-grid {
     display: flex;
     flex-wrap: wrap;
@@ -90,7 +77,7 @@
     width: 100%;
     max-width: 1512px;
     margin: 50px auto 80px;
-    padding: 0 20px 0 70px; /* 左から70pxスタート */
+    padding: 0 20px 0 70px; 
     box-sizing: border-box;
 }
 
@@ -101,10 +88,10 @@
     width: 290px; /* 固定幅 */
     height: 320px; /* 固定高さ */
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;/* 将来的に使用 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-decoration: none;
     color: inherit;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); /* #00000040 */
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); 
 }
 
 
@@ -126,7 +113,6 @@
     display: block;
 }
 
-/* 商品名 */
 .index-item__name {
     margin-top: 10px;
     padding: 0 5px;
@@ -137,10 +123,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    height: 30px; /* 商品名エリアの高さ（320 - 290 = 30） */
+    height: 30px; 
 }
 
-/* Sold バッジ */
 .index-item__sold-out {
     position: absolute;
     top: 50%;
@@ -153,9 +138,6 @@
     pointer-events: none;
 }
 
-/* ===========================================
-   レスポンシブ対応
-=========================================== */
 
 /* タブレット (768px - 850px) */
 @media screen and (min-width: 768px) and (max-width: 850px) {
