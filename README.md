@@ -54,6 +54,7 @@ DB_PASSWORD=laravel_pass
 ```
 
 続けてマイグレーションとシーディング、公開ストレージのシンボリックリンクを作成します。
+（`storage:link` を省略すると商品画像・プロフィール画像がブラウザで表示されません）
 
 ```bash
 php artisan migrate
